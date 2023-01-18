@@ -24,9 +24,9 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
-    private UserApp username;
+    private UserApp user;
     private LocalDate date;
-    private Set<Comments> comments = new HashSet<Comments>();
+    private String content;
     private Double rating;
     private Book book;
 }
