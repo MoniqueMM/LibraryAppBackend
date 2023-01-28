@@ -18,10 +18,10 @@ public class Book {
     private UUID id;
     private String title;
     private Author author;
-    private long isbn;
-    private long quantity;
+    private Long isbn;
+    private Long quantity;
     private Set<Review> reviews= new HashSet<>();
     private LocalDate releaseDate;
     private Set<Genre> genres = new HashSet<>();
-    private float rating;
+    private Double rating;
 }

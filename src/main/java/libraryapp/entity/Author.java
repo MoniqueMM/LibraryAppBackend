@@ -20,5 +20,5 @@ public class Author {
     private LocalDate DateOfBirth;
     private Set<Book> books = new HashSet<>();
     private Set<Genre> genres = new HashSet<>();
-    private float rating;
+    private Double rating;
 }

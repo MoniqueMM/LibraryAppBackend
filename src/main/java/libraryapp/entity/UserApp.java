@@ -1,8 +1,9 @@
 package libraryapp.entity;
 
 import jakarta.persistence.*;
-import libraryapp.role.Role;
 import lombok.*;
+
+import java.util.UUID;
 
 @Entity
 @Table(name ="users")
@@ -13,17 +14,17 @@ import lombok.*;
 @Setter
 @ToString
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class UserApp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
-    private final String username;
-    private final String password;
-    private final String email;
-    private final String adress;
-    private final Role role;
+    private UUID ID;
+    private String username;
+    private String password;
+    private String email;
+    private String adress;
+    private Role role;
 
 
 }
