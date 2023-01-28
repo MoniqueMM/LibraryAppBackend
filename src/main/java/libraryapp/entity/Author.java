@@ -11,12 +11,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.UUID;
-
-@Entity
 @Builder
-@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Author {
 
     @Id
@@ -46,4 +45,5 @@ public class Author {
     public int hashCode() {
         return Objects.hash(name, dateOfBirth, books, genres, rating);
     }
+
 }
