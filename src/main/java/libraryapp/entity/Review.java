@@ -6,6 +6,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Builder
 @Entity
 @Getter
 @Setter
@@ -18,6 +19,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private UserApp user;
     private LocalDate date;
     private String content;

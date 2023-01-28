@@ -13,19 +13,16 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-
-
 public class UserApp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-    private  String username;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID ID;
+    private String username;
     private String password;
     private String email;
-    private String address;
-//    private final Role role;
-
+    private String adress;
+    private Role role;
 
 }
 

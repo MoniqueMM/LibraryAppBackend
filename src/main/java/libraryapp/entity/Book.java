@@ -36,6 +36,7 @@ public class Book {
     private Set<Genre> genres = new HashSet<>();
     private Double rating;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,4 +50,5 @@ public class Book {
     public int hashCode() {
         return Objects.hash(getId(), getTitle(), getIsbn(), getQuantity(), getReleaseDate(), getRating());
     }
+
 }
