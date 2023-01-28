@@ -14,6 +14,8 @@ public interface BookService {
     Optional<Book> findById(UUID bookId);
     List<Book> findByAuthorId(UUID authorId);
     void deleteById(UUID bookId);
+    void updateQuantity(UUID bookId,Long quantity);
+    List<Book> findAll();
 
 
 }
