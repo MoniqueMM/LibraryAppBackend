@@ -6,7 +6,6 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name ="users")
 @Builder
 @Getter
 @Setter
@@ -16,8 +15,7 @@ import java.util.UUID;
 public class UserApp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID ID;
     private String username;
     private String password;
@@ -26,5 +24,3 @@ public class UserApp {
     private Role role;
 
 }
-
-
