@@ -4,26 +4,32 @@ import jakarta.persistence.*;
 import libraryapp.role.Role;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name ="users")
-@RequiredArgsConstructor
-@EqualsAndHashCode
-@Builder
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
+@RequiredArgsConstructor
+@ToString
+@NoArgsConstructor
 
 public class UserApp {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
-    private final String username;
-    private final String password;
-    private final String email;
-    private final String adress;
-    private final Role role;
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    private UUID id;
+
+    @NonNull
+    private String username;
+
+    @NonNull
+    private String email;
+
+    @NonNull
+    private String password;
+    @NonNull
+    private Role role;
 
 
 }
