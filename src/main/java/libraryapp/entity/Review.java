@@ -10,12 +10,13 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -25,6 +26,5 @@ public class Review {
     private Double rating;
     @ManyToOne
     private Book book;
-
 
 }

@@ -7,8 +7,6 @@ import java.util.UUID;
 
 @Entity
 @Table(name ="users")
-@RequiredArgsConstructor
-@EqualsAndHashCode
 @Builder
 @Getter
 @Setter
@@ -25,7 +23,6 @@ public class UserApp {
     private String email;
     private String adress;
     private Role role;
-
 
 }
 
