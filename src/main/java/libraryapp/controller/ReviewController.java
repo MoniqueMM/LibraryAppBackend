@@ -18,27 +18,27 @@ public class ReviewController {
     }
 
     @GetMapping("/all")
-    public Iterable<Review> getAll(){
+    public Iterable<Review> getAll() {
         return reviewService.findAllReviews();
     }
 
     @GetMapping
-    public Optional<Review> getById(@RequestParam UUID id){
+    public Optional<Review> getById(@RequestParam UUID id) {
         return reviewService.findById(id);
     }
 
     @PostMapping
-    public Review addReview(@RequestBody Review review){
+    public Review addReview(@RequestBody Review review) {
         return reviewService.addReview(review);
     }
 
     @PutMapping
-    public Review updateReview(@RequestBody Review review){
+    public Review updateReview(@RequestBody Review review) {
         return reviewService.addReview(review);
     }
 
     @DeleteMapping
-    public void deleteReview(@RequestParam UUID id){
+    public void deleteReview(@RequestParam UUID id) {
         reviewService.deleteById(id);
     }
 }
