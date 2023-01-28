@@ -17,6 +17,7 @@ public class UserApp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private UUID ID;
     private String username;
     private String password;
