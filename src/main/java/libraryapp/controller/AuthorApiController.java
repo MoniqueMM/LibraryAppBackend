@@ -3,6 +3,7 @@ package libraryapp.controller;
 
 import libraryapp.dto.AuthorDto;
 import libraryapp.entity.Author;
+import libraryapp.repository.AuthorRepository;
 import libraryapp.service.AuthorService;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +15,12 @@ import java.util.UUID;
 @RequestMapping("api/author")
 public class AuthorApiController {
     private final AuthorService authorService;
+    private final AuthorRepository authorRepository;
 
 
-    public AuthorApiController(AuthorService authorService) {
+    public AuthorApiController(AuthorService authorService, AuthorRepository authorRepository) {
         this.authorService = authorService;
+        this.authorRepository = authorRepository;
     }
 
 
@@ -54,5 +57,10 @@ public class AuthorApiController {
         authorService.deleteById(id);
     }
 
-
+    @GetMapping("/{authorId}")
+    public Double authorRatting(@PathVariable UUID authorId){
+        Optional<Author> authorById = authorService.getAuthorById(authorId);
+        Author authr = authorById.get();
+        return authr.getRating();
+    }
 }

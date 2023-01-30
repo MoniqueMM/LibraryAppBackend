@@ -34,6 +34,7 @@ public class AuthorService {
                 .name(authorDto.getName())
                 .dateOfBirth(authorDto.getDateOfBirth())
                 .genres(authorDto.getGenres())
+                .rating(0.0)
                 .build();
         return authorRepository.save(author);
     }

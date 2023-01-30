@@ -14,7 +14,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -25,7 +24,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Review {
@@ -34,7 +33,6 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private UserApp user;
     private LocalDate date;
     private String content;

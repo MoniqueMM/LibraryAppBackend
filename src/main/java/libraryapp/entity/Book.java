@@ -1,12 +1,7 @@
 package libraryapp.entity;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,7 +10,9 @@ import java.util.Set;
 import java.util.UUID;
 @Builder
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Book {
@@ -25,8 +22,9 @@ public class Book {
     private UUID id;
     @Column(nullable = false)
     private String title;
-    @ManyToOne
-    private Author author;
+    @ManyToMany(mappedBy = "books")
+    @ToString.Exclude
+    private Set<Author> author;
     @Column(nullable = false)
     private Long isbn;
     private Long quantity;

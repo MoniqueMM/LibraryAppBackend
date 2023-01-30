@@ -1,15 +1,18 @@
 package libraryapp.controller;
 
-import libraryapp.dto.BookDto;
+import libraryapp.dto.BookDtoIn;
+import libraryapp.dto.BookDtoOut;
 import libraryapp.entity.Book;
+import libraryapp.mapper.BookMapper;
 import libraryapp.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
@@ -20,34 +23,42 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PostMapping("")
-    public ResponseEntity<Book> add( @RequestBody @Validated BookDto bookDto){
-        final Book book = bookService.add(bookDto);
+    @PostMapping
+    public ResponseEntity<Book> add( @RequestBody BookDtoIn bookDtoIn){
+        final Book book = bookService.add(bookDtoIn);
         return ResponseEntity.status(HttpStatus.OK).body(book);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Book> findById(@PathVariable UUID id){
-        return ResponseEntity.of(bookService.findById(id));
+    @GetMapping("{id}")
+    public ResponseEntity<BookDtoOut> findById(@PathVariable UUID id){
+        final Optional<Book> optionalBook = bookService.findById(id);
+        return optionalBook.map(book -> ResponseEntity.ok(BookMapper.mapToDtoOut(book)))
+                .orElseGet(()-> ResponseEntity.of(Optional.empty()));
     }
-    @GetMapping("/{title}")
-    public ResponseEntity<Book> findByTitle(@PathVariable String title){
-        return ResponseEntity.of(bookService.findByTitle(title));
+    @GetMapping("{title}")
+    public ResponseEntity<BookDtoOut> findByTitle(@PathVariable String title){
+        final Optional<Book> optionalBook = bookService.findByTitle(title);
+        return optionalBook.map(book -> ResponseEntity.ok(BookMapper.mapToDtoOut(book)))
+                .orElseGet(()-> ResponseEntity.of(Optional.empty()));
     }
-    @GetMapping("")
-    public List<Book> findByAuthorId(@RequestParam UUID authorId){
-        return bookService.findByAuthorId(authorId);
+    @GetMapping("{authorId}")
+    public List<BookDtoOut> findByAuthorId(@PathVariable UUID authorId){
+        return bookService.findByAuthorId(authorId).stream()
+                .map(BookMapper::mapToDtoOut)
+                .collect(Collectors.toList());
     }
     @DeleteMapping("")
     public void deleteById (@RequestParam UUID bookId){
         bookService.deleteById(bookId);
     }
-    @PatchMapping("/{bookId}")
+    @PatchMapping("{bookId}")
     public void updateQuantity(@PathVariable UUID bookId, @RequestParam Long quantity){
         bookService.updateQuantity(bookId, quantity);
     }
     @GetMapping
-    public List<Book> findAll(){
-        return bookService.findAll();
+    public List<BookDtoOut> findAll(){
+        return bookService.findAll().stream()
+                .map(BookMapper::mapToDtoOut)
+                .collect(Collectors.toList());
     }
 }

@@ -1,10 +1,7 @@
 package libraryapp.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -13,9 +10,11 @@ import java.util.HashSet;
 import java.util.UUID;
 @Builder
 @Entity
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Author {
 
     @Id
@@ -24,11 +23,19 @@ public class Author {
     private String name;
     private LocalDate dateOfBirth;
 
-    @OneToMany // tu nie jestem pewna tej relacji, nie powinno być ManyToMany?
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "author_book",
+            joinColumns = {@JoinColumn(name = "author_id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id")}
+    )
+    @ToString.Exclude
     private Set<Book> books = new HashSet<>();
-
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = Genre.class)
+    @ElementCollection(targetClass = Genre.class,fetch = FetchType.EAGER)
     private Set<Genre> genres = new HashSet<>();
     private Double rating;
 

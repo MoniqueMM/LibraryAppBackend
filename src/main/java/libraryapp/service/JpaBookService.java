@@ -1,30 +1,34 @@
 package libraryapp.service;
 
-import libraryapp.dto.BookDto;
-import libraryapp.entity.Author;
+import libraryapp.dto.BookDtoIn;
 import libraryapp.entity.Book;
+import libraryapp.entity.Genre;
+import libraryapp.entity.Review;
 import libraryapp.repository.BookRepository;
+import libraryapp.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 public class JpaBookService implements BookService{
 
     private final BookRepository bookRepository;
+    private final ReviewRepository reviewRepository;
 
-    public JpaBookService(BookRepository bookRepository) {
+    public JpaBookService(BookRepository bookRepository, ReviewRepository reviewRepository) {
         this.bookRepository = bookRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @Override
-    public Book add(BookDto newBook) {
+    public Book add(BookDtoIn newBook) {
         Book book = Book.builder()
-                .author(Author.builder()
-                        .id(newBook.getAuthorId())
-                        .build())
-                .title(newBook.getTitle())
+                .author(Set.of())
                 .isbn(newBook.getIsbn())
                 .releaseDate(newBook.getReleaseDate())
                 .quantity(newBook.getQuantity())
@@ -65,8 +69,30 @@ public class JpaBookService implements BookService{
     }
 
     @Override
+    public List<Book> findByGenre(Genre genre) {
+        return bookRepository.findBookByGenre(genre);
+    }
+
+    @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+    public void updateBookRating(UUID bookId){
+        Optional<Book> bookToBeUpdated = bookRepository.findById(bookId);
+        List<Review> reviewList = reviewRepository.findByBook_Id(bookId);
+
+        if(bookToBeUpdated.isPresent()){
+            Book book = bookToBeUpdated.get();
+            Set<Double> reviewRatings = reviewList.stream().map(Review::getRating)
+                    .collect(Collectors.toSet());
+            Double allRatingScore =0.0;
+            for(Double r :reviewRatings){
+                allRatingScore+=r;
+            }
+            Double newRating = allRatingScore/reviewRatings.size();
+            book.setRating(newRating);
+            bookRepository.save(book);
+        }
     }
 
 }
