@@ -1,58 +1,71 @@
 package libraryapp.controller;
 
 
-import libraryapp.dto.AuthorDto;
+import libraryapp.dto.AuthorDtoIn;
+import libraryapp.dto.AuthorDtoOut;
 import libraryapp.entity.Author;
+import libraryapp.mapper.AuthorMapper;
 import libraryapp.repository.AuthorRepository;
-import libraryapp.service.AuthorService;
+import libraryapp.service.JpaAuthorService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/author")
 public class AuthorApiController {
-    private final AuthorService authorService;
+    private final JpaAuthorService authorService;
     private final AuthorRepository authorRepository;
 
 
-    public AuthorApiController(AuthorService authorService, AuthorRepository authorRepository) {
+    public AuthorApiController(JpaAuthorService authorService, AuthorRepository authorRepository) {
         this.authorService = authorService;
         this.authorRepository = authorRepository;
     }
 
-
-
     @GetMapping
-    List<Author> getAuthors(){
-        return authorService.getAuthor();
+    List<AuthorDtoOut> getAuthors(){
+        return authorService.getAuthors().stream()
+                .map(AuthorMapper::mapAuthorDtoOut)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
-    public Optional<Author> getAuthorById( @PathVariable UUID id){
-        return authorService.getAuthorById(id);
+    public List<AuthorDtoOut> getAuthorById( @PathVariable UUID id){
+        return authorService.getAuthorById(id).stream()
+                .map(AuthorMapper::mapAuthorDtoOut)
+                .collect(Collectors.toList());
+    }
+    @GetMapping("{name}")
+    public List<AuthorDtoOut>getAuthorByName(@PathVariable String name){
+        return authorService.getAuthorByName(name).stream()
+                .map(AuthorMapper::mapAuthorDtoOut)
+                .collect(Collectors.toList());
     }
 
-    @GetMapping("{name}")
-    public Optional<Author>getAuthorByName(@PathVariable String name){
-        return authorService.getAuthorByName(name);
-    }
+    //TODO
+    //findByGenre
 
     @PostMapping
-    public Author addAuthor(@RequestBody AuthorDto authorDto){
-        return authorService.addAuthor(authorDto);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Author addAuthor(@RequestBody AuthorDtoIn authorDtoIn){
+        return authorService.addAuthor(authorDtoIn);
     }
 
 
     @PutMapping("{id}")
-    public Author updateAuthor(@PathVariable UUID id, @RequestBody AuthorDto authorDto){
-        return authorService.updateAuthor(id, authorDto);
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Author updateAuthor(@PathVariable UUID id, @RequestBody AuthorDtoIn authorDtoIn){
+        return authorService.updateAuthor(id, authorDtoIn);
     }
 
 
     @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAuthor(@RequestParam UUID id){
         authorService.deleteById(id);
     }

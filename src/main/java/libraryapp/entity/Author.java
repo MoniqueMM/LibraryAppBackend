@@ -1,6 +1,8 @@
 package libraryapp.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -20,6 +22,8 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Size(min = 3, max = 255)
+    @NotNull
     private String name;
     private LocalDate dateOfBirth;
 
