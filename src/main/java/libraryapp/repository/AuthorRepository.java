@@ -14,5 +14,5 @@ public interface AuthorRepository extends JpaRepository<Author, UUID> {
     Optional<Author> findByName(String name);
 
     //Query
-    List<Author> findAuthorByGenre(Genre genre);
+    List<Author> findAuthorByGenres(Genre genre);
 }
