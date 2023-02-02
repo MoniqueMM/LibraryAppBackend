@@ -16,7 +16,7 @@ public class UserApp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID ID;
+    private UUID id;
     private String username;
     private String password;
     private String email;

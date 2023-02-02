@@ -18,7 +18,7 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     Optional<Book> findBookByTitle(String title);
     @Query("select b from Book b where :genre in elements(b.genres)")
     List<Book> findBookByGenre(@Param("genre") Genre genre);
-    @Query("select b from Book b where :author in elements(b.author)")
-    List<Book> findBookByGenre(@Param("genre") Author author);
+    @Query("select b from Book b where :authorId in elements(b.author)")
+    List<Book> findBookByAuthor(@Param("authorId") UUID authorId);
 
 }

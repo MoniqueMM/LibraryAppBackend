@@ -12,22 +12,20 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class JpaBookService implements BookService{
 
     private final BookRepository bookRepository;
-    private final ReviewRepository reviewRepository;
 
     public JpaBookService(BookRepository bookRepository, ReviewRepository reviewRepository) {
         this.bookRepository = bookRepository;
-        this.reviewRepository = reviewRepository;
     }
 
     @Override
     public Book add(BookDtoIn newBook) {
         Book book = Book.builder()
+                .title(newBook.getTitle())
                 .author(Set.of())
                 .isbn(newBook.getIsbn())
                 .releaseDate(newBook.getReleaseDate())
@@ -77,22 +75,22 @@ public class JpaBookService implements BookService{
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
-    public void updateBookRating(UUID bookId){
-        Optional<Book> bookToBeUpdated = bookRepository.findById(bookId);
-        List<Review> reviewList = reviewRepository.findByBook_Id(bookId);
-
-        if(bookToBeUpdated.isPresent()){
-            Book book = bookToBeUpdated.get();
-            Set<Double> reviewRatings = reviewList.stream().map(Review::getRating)
-                    .collect(Collectors.toSet());
-            Double allRatingScore =0.0;
-            for(Double r :reviewRatings){
-                allRatingScore+=r;
-            }
-            Double newRating = allRatingScore/reviewRatings.size();
-            book.setRating(newRating);
-            bookRepository.save(book);
-        }
-    }
+//    public void updateBookRating(UUID bookId){
+//        Optional<Book> bookToBeUpdated = bookRepository.findById(bookId);
+//        List<Review> reviewList = reviewRepository.findByBook_Id(bookId);
+//
+//        if(bookToBeUpdated.isPresent()){
+//            Book book = bookToBeUpdated.get();
+//            Set<Double> reviewRatings = reviewList.stream().map(Review::getRating)
+//                    .collect(Collectors.toSet());
+//            Double allRatingScore =0.0;
+//            for(Double r :reviewRatings){
+//                allRatingScore+=r;
+//            }
+//            Double newRating = allRatingScore/reviewRatings.size();
+//            book.setRating(newRating);
+//            bookRepository.save(book);
+//        }
+//    }
 
 }
