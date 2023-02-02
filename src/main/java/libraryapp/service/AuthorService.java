@@ -13,7 +13,7 @@ public interface AuthorService {
     List<Author> getAuthors();
     Optional<Author> getAuthorById(UUID id);
     Optional<Author> getAuthorByName(String name);
-    List<Author> findByGenres(Genre genre);
+    List<Author> findByGenre(Genre genre);
     Author addAuthor(AuthorDtoIn authorDtoIn);
     Author updateAuthor(UUID id, AuthorDtoIn authorDtoIn);
     void deleteById(UUID id);

@@ -1,8 +1,11 @@
 package libraryapp.repository;
 
 import libraryapp.entity.Author;
+import libraryapp.entity.Book;
 import libraryapp.entity.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,6 +16,9 @@ import java.util.UUID;
 public interface AuthorRepository extends JpaRepository<Author, UUID> {
     Optional<Author> findByName(String name);
 
-    //Query
-    List<Author> findAuthorByGenres(Genre genre);
+    @Query("select a from Author a where :genre in elements(a.genres) ")
+    List<Author> findAuthorByGenre(Genre genre);
+
+    @Query("select b from Book b where :genre in elements(b.genres)")
+    List<Book> findBookByGenre(@Param("genre") Genre genre);
 }

@@ -35,10 +35,9 @@ public class JpaAuthorService implements AuthorService {
     }
 
     @Override
-    public List<Author> findByGenres(Genre genre) {
-        return authorRepository.findAuthorByGenres(genre);
+    public List<Author> findByGenre(Genre genre) {
+        return authorRepository.findAuthorByGenre(genre);
     }
-
 
     @Override
     public Author addAuthor(AuthorDtoIn authorDtoIn) {

@@ -3,7 +3,6 @@ package libraryapp.service;
 import libraryapp.dto.BookDtoIn;
 import libraryapp.entity.Book;
 import libraryapp.entity.Genre;
-import libraryapp.entity.Review;
 import libraryapp.repository.BookRepository;
 import libraryapp.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
@@ -75,22 +74,6 @@ public class JpaBookService implements BookService{
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
-//    public void updateBookRating(UUID bookId){
-//        Optional<Book> bookToBeUpdated = bookRepository.findById(bookId);
-//        List<Review> reviewList = reviewRepository.findByBook_Id(bookId);
-//
-//        if(bookToBeUpdated.isPresent()){
-//            Book book = bookToBeUpdated.get();
-//            Set<Double> reviewRatings = reviewList.stream().map(Review::getRating)
-//                    .collect(Collectors.toSet());
-//            Double allRatingScore =0.0;
-//            for(Double r :reviewRatings){
-//                allRatingScore+=r;
-//            }
-//            Double newRating = allRatingScore/reviewRatings.size();
-//            book.setRating(newRating);
-//            bookRepository.save(book);
-//        }
-//    }
+
 
 }
