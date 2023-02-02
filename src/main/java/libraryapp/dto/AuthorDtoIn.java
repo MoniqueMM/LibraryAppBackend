@@ -1,6 +1,5 @@
 package libraryapp.dto;
 
-import jakarta.validation.constraints.NotNull;
 import libraryapp.entity.Genre;
 import lombok.Builder;
 import lombok.Data;
@@ -11,14 +10,11 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class AuthorDto {
+public class AuthorDtoIn {
 
-    @NotNull
+
     private String name;
-
-    private UUID bookId;
-
     private LocalDate dateOfBirth;
-
+    private Set<UUID> bookId;
     private Set<Genre> genres;
 }
