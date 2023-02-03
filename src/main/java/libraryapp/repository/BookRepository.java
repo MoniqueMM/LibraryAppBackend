@@ -14,7 +14,6 @@ import java.util.UUID;
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID> {
 
-    List<Book> findBookByAuthor_Id(UUID authorId);
     Optional<Book> findBookByTitle(String title);
     @Query("select b from Book b where :genre in elements(b.genres)")
     List<Book> findBookByGenre(@Param("genre") Genre genre);

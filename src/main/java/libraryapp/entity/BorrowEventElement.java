@@ -23,7 +23,7 @@ public class BorrowEventElement {
     @ManyToOne
     @ToString.Exclude
     private Book book;
-    private long bookAmount;
+    private Long bookAmount;
     private Boolean isReturned;
 
     @Override

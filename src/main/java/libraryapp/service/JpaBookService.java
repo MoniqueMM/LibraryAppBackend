@@ -17,7 +17,7 @@ public class JpaBookService implements BookService{
 
     private final BookRepository bookRepository;
 
-    public JpaBookService(BookRepository bookRepository, ReviewRepository reviewRepository) {
+    public JpaBookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
 
@@ -47,7 +47,7 @@ public class JpaBookService implements BookService{
 
     @Override
     public List<Book> findByAuthorId(UUID authorId) {
-        return bookRepository.findBookByAuthor_Id(authorId);
+        return bookRepository.findBookByAuthor(authorId);
     }
 
     @Override
@@ -55,16 +55,6 @@ public class JpaBookService implements BookService{
         bookRepository.deleteById(bookId);
     }
 
-//    @Override
-//    public void updateQuantity(UUID bookId, Long quantity) {
-//        Optional<Book> bookToBeUpdated = bookRepository.findById(bookId).ifPresent(book -> book.setQuantity(ge));
-//        if(bookToBeUpdated.isPresent()){
-//            Book book = bookToBeUpdated.get();
-//            book.setQuantity(quantity);
-//            bookRepository.save(book);
-//        }
-//    }
-    //TODO move updateQuantity to BorrowEventElementService
 
     @Override
     public List<Book> findByGenre(Genre genre) {

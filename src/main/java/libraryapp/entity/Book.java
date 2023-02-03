@@ -39,10 +39,9 @@ public class Book {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Book book)) return false;
-        return getIsbn() == book.getIsbn() && getQuantity() == book.getQuantity() && Double.compare(book.getRating(),
-                getRating()) == 0 && getId().equals(book.getId()) && getTitle().equals(book.getTitle())
-                && Objects.equals(getAuthor(), book.getAuthor()) && getReleaseDate().equals(book.getReleaseDate());
+        return getId().equals(book.getId()) && getTitle().equals(book.getTitle()) && Objects.equals(getAuthor(), book.getAuthor()) && getIsbn().equals(book.getIsbn()) && Objects.equals(getQuantity(), book.getQuantity()) && Objects.equals(getReleaseDate(), book.getReleaseDate()) && Objects.equals(getGenres(), book.getGenres()) && Objects.equals(getRating(), book.getRating());
     }
+
 
     @Override
     public int hashCode() {
