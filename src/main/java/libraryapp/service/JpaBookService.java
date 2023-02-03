@@ -55,15 +55,16 @@ public class JpaBookService implements BookService{
         bookRepository.deleteById(bookId);
     }
 
-    @Override
-    public void updateQuantity(UUID bookId, Long quantity) {
-        Optional<Book> bookToBeUpdated = bookRepository.findById(bookId);
-        if(bookToBeUpdated.isPresent()){
-            Book book = bookToBeUpdated.get();
-            book.setQuantity(quantity);
-            bookRepository.save(book);
-        }
-    }
+//    @Override
+//    public void updateQuantity(UUID bookId, Long quantity) {
+//        Optional<Book> bookToBeUpdated = bookRepository.findById(bookId).ifPresent(book -> book.setQuantity(ge));
+//        if(bookToBeUpdated.isPresent()){
+//            Book book = bookToBeUpdated.get();
+//            book.setQuantity(quantity);
+//            bookRepository.save(book);
+//        }
+//    }
+    //TODO move updateQuantity to BorrowEventElementService
 
     @Override
     public List<Book> findByGenre(Genre genre) {

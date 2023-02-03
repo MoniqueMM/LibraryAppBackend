@@ -1,5 +1,6 @@
 package libraryapp.controller;
 
+import jakarta.validation.Valid;
 import libraryapp.dto.BookDtoIn;
 import libraryapp.dto.BookDtoOut;
 import libraryapp.entity.Book;
@@ -24,7 +25,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> add( @RequestBody BookDtoIn bookDtoIn){
+    public ResponseEntity<Book> add(  @RequestBody BookDtoIn bookDtoIn){
         final Book book = bookService.add(bookDtoIn);
         return ResponseEntity.status(HttpStatus.OK).body(book);
     }
@@ -47,14 +48,14 @@ public class BookController {
                 .map(BookMapper::mapToDtoOut)
                 .collect(Collectors.toList());
     }
-    @DeleteMapping("")
+    @DeleteMapping
     public void deleteById (@RequestParam UUID bookId){
         bookService.deleteById(bookId);
     }
-    @PatchMapping("{bookId}")
-    public void updateQuantity(@PathVariable UUID bookId, @RequestParam Long quantity){
-        bookService.updateQuantity(bookId, quantity);
-    }
+//    @PatchMapping("{bookId}")
+//    public void updateQuantity(@PathVariable UUID bookId, @RequestParam Long quantity){
+//        bookService.updateQuantity(bookId, quantity);
+//    }
     @GetMapping
     public List<BookDtoOut> findAll(){
         return bookService.findAll().stream()
