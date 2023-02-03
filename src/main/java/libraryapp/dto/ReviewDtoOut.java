@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Builder
 @Data
-public class ReviewDto {
+public class ReviewDtoOut {
 
     private UUID userId;
     private LocalDate date;
