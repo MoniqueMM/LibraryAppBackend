@@ -48,6 +48,8 @@ public class JpaAuthorService implements AuthorService {
         return authorRepository.findAuthorByGenre(genre);
     }
 
+
+
     @Override
     public Author addAuthor(AuthorDtoIn authorDtoIn) {
         Author author = Author.builder()
@@ -60,17 +62,16 @@ public class JpaAuthorService implements AuthorService {
         return authorRepository.save(author);
     }
 
-    @Override// dodanie książek
+    @Override
     public Author updateAuthor(UUID id, AuthorDtoIn authorDtoIn) {
         Author author = authorRepository.findById(id).get();
         author.setName(authorDtoIn.getName());
         author.setGenres(authorDtoIn.getGenres());
         author.setDateOfBirth(authorDtoIn.getDateOfBirth());
+        author.setBooks(Set.of());
+        author.setGenres(authorDtoIn.getGenres());
         return authorRepository.save(author);
     }
-
-    //TODO
-    // zmiana raitingu autora
 
     @Override
     public void deleteById(UUID id) {

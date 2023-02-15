@@ -27,8 +27,8 @@ public class JpaUserService implements UserAppService {
     }
 
     @Override
-    public Optional<UserApp> getUsersById(UUID id) {
-        return userAppRepository.findById(id);
+    public Optional<UserApp> getUsersById(UUID uuid) {
+        return userAppRepository.findById(uuid);
     }
 
     @Override
@@ -37,17 +37,16 @@ public class JpaUserService implements UserAppService {
     }
 
     @Override
-    public UserApp updateUser(UUID id, UserDtoIn userDtoIn) {
-        UserApp userApp = userAppRepository.findById(id).get();
-        userApp.setUserName(userDtoIn.getUsername());
-        userApp.setAdress(userDtoIn.getAdress());
+    public UserApp updateUser(UUID uuid, UserDtoIn userDtoIn) {
+        UserApp userApp = userAppRepository.findById(uuid).get();
+        userApp.setUsername(userDtoIn.getUsername());
         userApp.setEmail(userDtoIn.getEmail());
         return userAppRepository.save(userApp);
     }
 
     @Override
-    public void deleteUser(UUID id) {
-        userAppRepository.deleteById(id);
+    public void deleteUser(UUID uuid) {
+        userAppRepository.deleteById(uuid);
     }
 
 

@@ -19,7 +19,5 @@ public interface AuthorService {
     Author updateAuthor(UUID id, AuthorDtoIn authorDtoIn);
     void deleteById(UUID id);
 
-    // update author rating
-
 
 }

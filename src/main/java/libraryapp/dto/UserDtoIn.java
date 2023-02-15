@@ -10,6 +10,5 @@ public class UserDtoIn {
 
     private String username;
     private String email;
-    private String adress;
-    private String password;
+      private String password;
 }
