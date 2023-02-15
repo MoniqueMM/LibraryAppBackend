@@ -4,6 +4,7 @@ package libraryapp.controller;
 import libraryapp.dto.AuthorDtoIn;
 import libraryapp.dto.AuthorDtoOut;
 import libraryapp.entity.Author;
+import libraryapp.entity.Genre;
 import libraryapp.mapper.AuthorMapper;
 import libraryapp.repository.AuthorRepository;
 import libraryapp.service.JpaAuthorService;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/author")
+@CrossOrigin("http://localhost:3000/")
 public class AuthorApiController {
     private final JpaAuthorService authorService;
     private final AuthorRepository authorRepository;
@@ -47,8 +49,12 @@ public class AuthorApiController {
                 .collect(Collectors.toList());
     }
 
-    //TODO
-    //findByGenre
+    @GetMapping("{genres}")
+    public List<AuthorDtoOut>getAuthorByGenres (@PathVariable Genre genre){
+        return authorService.findByGenre(genre).stream()
+                .map(AuthorMapper::mapAuthorDtoOut)
+                .collect(Collectors.toList());
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -64,7 +70,7 @@ public class AuthorApiController {
     }
 
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAuthor(@RequestParam UUID id){
         authorService.deleteById(id);

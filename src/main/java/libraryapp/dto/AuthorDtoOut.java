@@ -16,7 +16,7 @@ public class AuthorDtoOut {
     private UUID id;
     private String name;
     private LocalDate dateOfBirth;
-    private Set<Book> books; // tu coś poprawić
+    private Set<Book> books;
     private Set<Genre> genres;
     private Double rating;
 }
