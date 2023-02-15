@@ -1,7 +1,9 @@
 package libraryapp.service;
 
 import libraryapp.dto.ReviewDtoIn;
+import libraryapp.entity.Book;
 import libraryapp.entity.Review;
+import libraryapp.repository.BookRepository;
 import libraryapp.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +16,11 @@ import java.util.UUID;
 public class ReviewService implements IReviewService {
 
     private final ReviewRepository reviewRepository;
+    private final BookRepository bookRepository;
 
-    public ReviewService(ReviewRepository reviewRepository) {
+    public ReviewService(ReviewRepository reviewRepository, BookRepository bookRepository) {
         this.reviewRepository = reviewRepository;
+        this.bookRepository = bookRepository;
     }
 
 
@@ -29,6 +33,9 @@ public class ReviewService implements IReviewService {
                 .rating(newReview.getRating())
                 .book(newReview.getBook())
                 .build();
+        Double newRating = reviewRepository.getBookRating(newReview.getBook().getId());
+        bookRepository.findById(newReview.getBook().getId()).ifPresent(b->{b.setRating(newRating);
+        bookRepository.save(b);});
         return reviewRepository.save(review);
     }
 

@@ -1,7 +1,7 @@
 package libraryapp.mapper;
 
 import libraryapp.dto.AuthorDtoOut;
-import libraryapp.dto.AuthorForBooksDtoOut;
+import libraryapp.dto.AuthorWithoutBooksDtoOut;
 import libraryapp.entity.Author;
 
 import java.util.HashSet;
@@ -9,8 +9,8 @@ import java.util.HashSet;
 
 public class AuthorMapper {
 
-    public static AuthorForBooksDtoOut mapToAuthorForBooksDtoOut(Author author){
-        return AuthorForBooksDtoOut.builder()
+    public static AuthorWithoutBooksDtoOut mapToAuthorForBooksDtoOut(Author author){
+        return AuthorWithoutBooksDtoOut.builder()
                 .id(author.getId())
                 .name(author.getName())
                 .genres(author.getGenres())

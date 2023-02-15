@@ -14,7 +14,7 @@ public class BookDtoOut {
 
     private UUID id;
     private String title;
-    private Set<AuthorForBooksDtoOut> authors;
+    private Set<AuthorWithoutBooksDtoOut> authors;
     private Long isbn;
     private Long quantity;
     private LocalDate releaseDate;

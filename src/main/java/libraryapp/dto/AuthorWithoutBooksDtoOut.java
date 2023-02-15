@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class AuthorForBooksDtoOut {
+public class AuthorWithoutBooksDtoOut {
 
     private UUID id;
     private String name;
