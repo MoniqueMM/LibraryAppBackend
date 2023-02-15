@@ -4,6 +4,7 @@ import libraryapp.dto.AuthorDtoIn;
 import libraryapp.entity.Author;
 import libraryapp.entity.Genre;
 import libraryapp.repository.AuthorRepository;
+import libraryapp.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +15,13 @@ import java.util.UUID;
 @Service
 public class JpaAuthorService implements AuthorService {
     private final AuthorRepository authorRepository;
+    private final BookRepository bookRepository;
 
-    public JpaAuthorService(AuthorRepository authorRepository) {
+    public JpaAuthorService(AuthorRepository authorRepository, BookRepository bookRepository) {
         this.authorRepository = authorRepository;
+        this.bookRepository = bookRepository;
     }
+
 
     @Override
     public List<Author> getAuthors() {
@@ -30,8 +34,13 @@ public class JpaAuthorService implements AuthorService {
     }
 
     @Override
-    public Optional<Author> getAuthorByName(String name) {
+    public List<Author> getAuthorByName(String name) {
         return authorRepository.findByName(name);
+    }
+
+    @Override
+    public List<Author> getAuthorByRating() {
+        return bookRepository.getAuthorRating ;
     }
 
     @Override
