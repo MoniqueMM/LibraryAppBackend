@@ -39,8 +39,8 @@ public class JpaAuthorService implements AuthorService {
     }
 
     @Override
-    public List<Author> getAuthorByRating() {
-        return bookRepository.getAuthorRating ;
+    public List<Author> getAuthorByRating(UUID id) {
+        return bookRepository.getAuthorRating(id);
     }
 
     @Override

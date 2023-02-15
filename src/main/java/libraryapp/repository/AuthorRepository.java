@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, UUID> {
-    Optional<Author> findByName(String name);
+    List<Author> findByName(String name);
 
     Optional<Author>findById(UUID id);
     @Query("select a from Author a where :genre in elements(a.genres) ")
