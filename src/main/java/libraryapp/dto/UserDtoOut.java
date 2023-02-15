@@ -14,5 +14,8 @@ public class UserDtoOut {
     private String username;
     private String password;
     private String email;
-      private Role role;
+    private String adress;
+    private Double rating;
+    private Role role;
+
 }
