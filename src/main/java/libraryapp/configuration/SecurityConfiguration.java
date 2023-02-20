@@ -25,6 +25,8 @@ public class SecurityConfiguration {
         return httpSecurity
                 .csrf()
                 .disable()
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**")
                 .permitAll()

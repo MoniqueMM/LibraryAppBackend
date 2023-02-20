@@ -21,5 +21,5 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     List<Book> findBookByAuthor(@Param("authorId") UUID authorId);
 
     @Query("select avg(r.rating) from Book as r where :authorId in elements(r.author)")
-    List<Author> getAuthorRating (@Param("id") UUID authorId);
+    List<Author> getAuthorRating (@Param("authorId") UUID authorId);
 }
