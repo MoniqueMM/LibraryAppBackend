@@ -22,7 +22,7 @@ public class UserApp implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID uuid;
+    private UUID id;
 
     private String username;
 

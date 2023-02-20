@@ -18,11 +18,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/author")
-@CrossOrigin("http://localhost:3000/")
+//@CrossOrigin("http://localhost:3000/")
 public class AuthorApiController {
     private final JpaAuthorService authorService;
     private final AuthorRepository authorRepository;
-
 
     public AuthorApiController(JpaAuthorService authorService, AuthorRepository authorRepository) {
         this.authorService = authorService;
@@ -52,6 +51,13 @@ public class AuthorApiController {
     @GetMapping("{genres}")
     public List<AuthorDtoOut>getAuthorByGenres (@PathVariable Genre genre){
         return authorService.findByGenre(genre).stream()
+                .map(AuthorMapper::mapAuthorDtoOut)
+                .collect(Collectors.toList());
+    }
+
+    @GetMapping("/topAuthor")
+    public  List<AuthorDtoOut>getTopAuthor(@PathVariable UUID id){
+        return authorService.getAuthorRating(id).stream()
                 .map(AuthorMapper::mapAuthorDtoOut)
                 .collect(Collectors.toList());
     }

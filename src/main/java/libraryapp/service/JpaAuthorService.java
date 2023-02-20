@@ -7,10 +7,8 @@ import libraryapp.repository.AuthorRepository;
 import libraryapp.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class JpaAuthorService implements AuthorService {
@@ -39,15 +37,19 @@ public class JpaAuthorService implements AuthorService {
     }
 
     @Override
-    public List<Author> getAuthorByRating(UUID id) {
-        return bookRepository.getAuthorRating(id);
+    public List<Author> getAuthorRating(UUID id) {
+        List<Author> authorRating = bookRepository.getAuthorRating(id)
+                .stream().sorted(Comparator.comparing(Author::getRating)
+                .reversed()).limit(3)
+                .collect(Collectors.toList());
+        return authorRating;
+
     }
 
     @Override
     public List<Author> findByGenre(Genre genre) {
         return authorRepository.findAuthorByGenre(genre);
     }
-
 
 
     @Override

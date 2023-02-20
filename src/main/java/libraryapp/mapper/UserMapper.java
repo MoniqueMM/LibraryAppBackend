@@ -10,7 +10,7 @@ public class UserMapper {
 
     public static UserDtoOut mapUserDtoOut (UserApp userApp){
         return UserDtoOut.builder()
-                .id(userApp.getUuid())
+                .id(userApp.getId())
                 .username(userApp.getUsername())
                 .password(userApp.getPassword())
                 .email(userApp.getEmail())
