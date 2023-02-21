@@ -1,4 +1,4 @@
-package libraryapp.authentication;
+package libraryapp.entity.authentication;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

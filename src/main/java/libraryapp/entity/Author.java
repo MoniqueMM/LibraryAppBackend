@@ -23,7 +23,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Size(min = 3, max = 255)
-    @NotNull
+
     private String name;
     private LocalDate dateOfBirth;
 

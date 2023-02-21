@@ -1,4 +1,4 @@
-package libraryapp.authentication;
+package libraryapp.entity.authentication;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

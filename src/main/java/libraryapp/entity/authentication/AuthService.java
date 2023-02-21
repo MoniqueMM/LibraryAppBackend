@@ -1,4 +1,4 @@
-package libraryapp.authentication;
+package libraryapp.entity.authentication;
 
 
 import libraryapp.configuration.JwtService;
@@ -6,7 +6,6 @@ import libraryapp.entity.Role;
 import libraryapp.entity.UserApp;
 import libraryapp.repository.UserAppRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

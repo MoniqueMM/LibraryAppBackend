@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/author")
-//@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("http://localhost:3000/")
 public class AuthorApiController {
     private final JpaAuthorService authorService;
     private final AuthorRepository authorRepository;
