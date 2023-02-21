@@ -30,8 +30,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth/**")
                 .permitAll()
-                .requestMatchers(toH2Console())
-                .permitAll()
+
+//                .requestMatchers(toH2Console())
+//                .permitAll()
                 .requestMatchers("/api/v1/dummy")
                 .hasAuthority("ADMIN")
                 .anyRequest()
