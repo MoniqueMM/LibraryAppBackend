@@ -5,6 +5,7 @@ import libraryapp.entity.Author;
 import libraryapp.entity.Genre;
 import libraryapp.repository.AuthorRepository;
 import libraryapp.repository.BookRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -43,6 +44,15 @@ public class JpaAuthorService implements AuthorService {
                 .reversed()).limit(3)
                 .collect(Collectors.toList());
         return authorRating;
+
+    }
+
+    public List<Author> topThree (){
+        List<Author> list=authorRepository.findAll();
+      return   list.stream()
+                .sorted(Comparator.comparing(Author::getRating).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
 
     }
 

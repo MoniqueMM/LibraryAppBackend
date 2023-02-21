@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/author")
-//@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("http://localhost:3000/")
 public class AuthorApiController {
     private final JpaAuthorService authorService;
     private final AuthorRepository authorRepository;
@@ -56,8 +56,8 @@ public class AuthorApiController {
     }
 
     @GetMapping("/topAuthor")
-    public  List<AuthorDtoOut>getTopAuthor(@PathVariable UUID id){
-        return authorService.getAuthorRating(id).stream()
+    public  List<AuthorDtoOut>getTopAuthor(){
+        return authorService.topThree().stream()
                 .map(AuthorMapper::mapAuthorDtoOut)
                 .collect(Collectors.toList());
     }
