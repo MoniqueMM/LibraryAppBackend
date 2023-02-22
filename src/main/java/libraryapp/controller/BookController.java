@@ -1,9 +1,11 @@
 package libraryapp.controller;
 
 import jakarta.validation.Valid;
+import libraryapp.dto.AuthorDtoOut;
 import libraryapp.dto.BookDtoIn;
 import libraryapp.dto.BookDtoOut;
 import libraryapp.entity.Book;
+import libraryapp.mapper.AuthorMapper;
 import libraryapp.mapper.BookMapper;
 import libraryapp.service.BookService;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin("http://localhost:3000/")
 public class BookController {
     private final BookService bookService;
 
@@ -62,4 +65,14 @@ public class BookController {
                 .map(BookMapper::mapToDtoOut)
                 .collect(Collectors.toList());
     }
+
+
+    @GetMapping("/topBook")
+    public  List<BookDtoOut>getTopBooks(){
+        return bookService.topThreeBook().stream()
+                .map(BookMapper::mapToDtoOut)
+                .collect(Collectors.toList());
+    }
+
+
 }

@@ -25,6 +25,7 @@ public class Author {
     @Size(min = 3, max = 255)
 
     private String name;
+    private String description;
     private LocalDate dateOfBirth;
 
     @ManyToMany(cascade = {

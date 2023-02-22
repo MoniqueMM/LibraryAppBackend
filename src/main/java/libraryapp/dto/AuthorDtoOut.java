@@ -19,4 +19,5 @@ public class AuthorDtoOut {
     private Set<Book> books;
     private Set<Genre> genres;
     private Double rating;
+    private String description;
 }
