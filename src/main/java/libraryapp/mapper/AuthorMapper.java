@@ -23,6 +23,7 @@ public class AuthorMapper {
         return AuthorDtoOut.builder()
                 .id(author.getId())
                 .name(author.getName())
+                .description(author.getDescription())
                 .dateOfBirth(author.getDateOfBirth())
                 .books(author.getBooks())
                 .genres(new HashSet<>(author.getGenres()))

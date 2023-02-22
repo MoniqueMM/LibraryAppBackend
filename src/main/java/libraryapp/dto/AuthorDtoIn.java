@@ -17,4 +17,5 @@ public class AuthorDtoIn {
     private LocalDate dateOfBirth;
     private Set<UUID> bookId;
     private Set<Genre> genres;
+    private String description;
 }

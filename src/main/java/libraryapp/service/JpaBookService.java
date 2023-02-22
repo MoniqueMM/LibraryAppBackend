@@ -1,16 +1,15 @@
 package libraryapp.service;
 
 import libraryapp.dto.BookDtoIn;
+import libraryapp.entity.Author;
 import libraryapp.entity.Book;
 import libraryapp.entity.Genre;
 import libraryapp.repository.BookRepository;
 import libraryapp.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class JpaBookService implements BookService{
@@ -67,4 +66,13 @@ public class JpaBookService implements BookService{
     }
 
 
+    @Override
+    public List<Book> topThreeBook (){
+        List<Book> list=bookRepository.findAll();
+        return   list.stream()
+                .sorted(Comparator.comparing(Book::getRating).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+    }
 }

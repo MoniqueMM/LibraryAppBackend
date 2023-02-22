@@ -19,5 +19,6 @@ public interface BookService {
     List<Book> findByGenre(Genre genre);
     List<Book> findAll();
 
+    List<Book> topThreeBook();
 
 }
