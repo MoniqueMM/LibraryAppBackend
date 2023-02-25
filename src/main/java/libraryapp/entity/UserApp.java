@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table (name="users")
@@ -31,12 +29,18 @@ public class UserApp implements UserDetails {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    private Role role = Role.ADMIN;
+    private List<Role> role = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(getRole().toString());
         return List.of(authority);
+    }
+
+    public UserApp (String username, String email, String password){
+        this.username = username;
+        this.email = email;
+        this.password =password;
     }
 
     @Override
@@ -69,4 +73,7 @@ public class UserApp implements UserDetails {
         return true;
     }
 
+    public List<Role> getRoles() {
+        return role;
+    }
 }
